@@ -1,13 +1,41 @@
 import { transformSync } from "@swc/core";
 import type {
-  Options
+  Options,
+  Config
 } from "@swc/core";
-import type {TransformOptions, TRANSFORM_RESULT} from "jiti/dist/types";
+// @see: https://github.com/unjs/jiti/issues/132
+import type { TransformOptions, TRANSFORM_RESULT } from "jiti/dist/types";
 
 export default function transform(opts: TransformOptions): TRANSFORM_RESULT {
+  const _defaultConfig: Config = {
+    module: {
+      type: 'commonjs',
+      ignoreDynamic: true,
+    },
+    env: {
+      targets: {
+        node: process.versions.node
+      }
+    },
+    jsc: {
+      loose: true,
+      externalHelpers: false,
+      parser: {
+        syntax: 'typescript',
+        dynamicImport: true,
+        tsx: opts.filename?.endsWith('.tsx') ?? false,
+      },
+      transform: {
+        react: {
+          runtime: "automatic"
+        },
+      },
+    },
+  }
+
   const _opts: Options = {
-    filename: "",
-    cwd: "/",
+    filename: opts.filename,
+    ..._defaultConfig,
   };
 
   try {

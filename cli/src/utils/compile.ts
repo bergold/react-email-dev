@@ -4,7 +4,11 @@ import { render } from "@react-email/render";
 import { createElement } from "react";
 import transform from "./transform";
 
-const jiti = _jiti(__filename, { transform });
+const jiti = _jiti(__filename, {
+  extensions: [".js", ".mjs", ".cjs", ".jsx", ".ts", ".mts", ".cts", ".tsx", ".json"], // @see: https://github.com/unjs/jiti/issues/138
+  cache: false, // TODO: enable cache, but store in local folder
+  transform
+});
 
 export async function compileEmail(file: {
   slug: string;

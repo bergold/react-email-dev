@@ -1,12 +1,12 @@
 {
     "name": "@bergold/react-email-dev",
-    "version": "0.1.0",
+    "version": "0.3.0",
     "bin": {
         "email": "./dist/cli/index.js"
     },
     "scripts": {
         "dev": "ts-node ./src/index.ts",
-        "build": "tsc"
+        "build": "tsup src/index.ts --outDir dist/cli"
     },
     "engines": {
         "node": ">=16.0.0"
@@ -35,7 +35,8 @@
         "@types/react": "^18.0.37",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
-        "ts-node": "10.9.1"
+        "ts-node": "10.9.1",
+        "tsup": "^6.7.0"
     },
     "packageManager": "yarn@1.22.19"
 }
