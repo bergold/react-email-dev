@@ -2,7 +2,7 @@ import path from 'path';
 
 // Package variables
 export const DEFAULT_EMAILS_DIRECTORY = 'emails';
-export const PACKAGE_NAME = 'react-email';
+export const BIN_NAME = 'email';
 
 // Default paths
 export const CURRENT_PATH = process.cwd();

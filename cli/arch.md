@@ -28,3 +28,20 @@
 
 1. Watch `<emailDir>`
 2. Publish `emails` event to SSE
+
+## Resilience
+
+- [ ] `email dev` should not crash on syntax errors in email previews
+- [ ] `email dev` should not crash on errors
+- [ ] `/api/email/:slug` should report errors to the client
+
+## Roadmap
+
+- [ ] Check support for .swcrc and swc plugins
+
+## Dist
+
+```txt
+/dist/client/ - static files for the preview client
+/dist/cli.js  – bundled cli
+```

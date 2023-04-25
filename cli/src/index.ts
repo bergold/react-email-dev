@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 import { program } from '@commander-js/extra-typings';
 import { dev } from './commands/dev';
-import { PACKAGE_NAME } from './utils/constants';
+import { BIN_NAME } from './utils/constants';
 import packageJson from '../package.json';
 
 program
-  .name(PACKAGE_NAME)
+  .name(BIN_NAME)
   .description('A live preview of your emails right in your browser')
   .version(packageJson.version);
 

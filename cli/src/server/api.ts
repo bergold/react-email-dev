@@ -64,9 +64,13 @@ export function apiRouter(emailsDir: string) {
       return;
     }
 
-    const data = await compileEmail(file);
-
-    res.json(data);
+    try {
+      const data = await compileEmail(file);
+      res.json(data);
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: err });
+    }
   });
 
   return api;

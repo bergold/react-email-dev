@@ -1,8 +1,13 @@
 # react.email dev
 
-## Dist
+## TODO
 
-```txt
-/dist/client/ - static files for the preview client
-/dist/cli.js  – bundled cli
-```
+### CLI
+
+- [ ] build step
+  - bundle and transpile cli
+  - copy client
+
+### Client
+
+- [ ] Client-side routing

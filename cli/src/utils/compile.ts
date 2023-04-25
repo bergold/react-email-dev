@@ -14,12 +14,26 @@ export async function compileEmail(file: {
   process.stdout.write(`Compiling ${file.relativePath}...`);
   const now = Date.now();
 
-  const Email = jiti(file.fullPath).default;
+  try {
 
-  const markup = render(createElement(Email, {}), { pretty: true });
-  const plainText = render(createElement(Email, {}), { plainText: true });
-  const reactMarkup = await readFile(file.fullPath, { encoding: "utf-8" });
+    const Email = jiti(file.fullPath);
 
-  process.stdout.write(`done in ${Date.now() - now}ms\n`);
-  return { markup, plainText, reactMarkup };
+    if (Email.__JITI_ERROR__) {
+      throw Email.__JITI_ERROR__;
+    }
+
+    if (!Email.default) {
+      throw new Error(`No default export found in ${file.relativePath}`);
+    }
+
+    const markup = render(createElement(Email.default, {}), { pretty: true });
+    const plainText = render(createElement(Email.default, {}), { plainText: true });
+    const reactMarkup = await readFile(file.fullPath, { encoding: "utf-8" });
+
+    process.stdout.write(`done in ${Date.now() - now}ms\n`);
+    return { markup, plainText, reactMarkup };
+  } catch (error) {
+    process.stdout.write(`errored after ${Date.now() - now}ms\n`);
+    throw error;
+  }
 }
